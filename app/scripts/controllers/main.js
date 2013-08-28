@@ -1,24 +1,18 @@
 'use strict';
 
 angular.module('searchPageApp')
-  .controller('MainCtrl', function ($scope) {
+  .controller('MainCtrl', function ($scope, sites) {
 
     $scope.searchText = 'text';
-    $scope.searchSiteOptions = [
-      {name: 'zippyshare', site: 'zippyshare.com'},
-      {name: 'themeok', site: 'themeok.com'} 
-    ];
+    $scope.searchSiteOptions = sites;
     $scope.searchSite = $scope.searchSiteOptions[0];
 
     $scope.search = function() {
-      // console.log("site: " + $scope.searchSite.site); 
-      var query = $scope.searchText + " " + "site:" + $scope.searchSite.site;
-      window.open("https://www.google.com.hk/search?q=" + query, '_blank');
+      var site = $scope.searchSite;
+      var postfix = site.params,
+          query = $scope.searchText + " " + postfix,
+          url = site.url.replace('{{query}}', query);
+      // console.log("url: " + url); 
+      window.open(url, '_blank');
     };
   });
-
-// var json = {
-//   name: 'zippyshare',
-//   site: 'zippyshare.com',
-//   prefix: 'https://www.google.com.hk/search?q='
-// };
