@@ -1,0 +1,2 @@
+input Query
+then Search
