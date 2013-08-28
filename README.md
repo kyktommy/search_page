@@ -1,2 +1,0 @@
-input Query
-then Search
